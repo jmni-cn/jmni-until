@@ -18,15 +18,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jmni-cn/juntils.git"
+    "url": "git+https://github.com/jmni-cn/jmni-until.git"
   },
   "author": "jmni.cn",
   "license": "ISC",
   "sideEffects": false,
   "bugs": {
-    "url": "https://github.com/jmni-cn/juntils/issues"
+    "url": "https://github.com/jmni-cn/jmni-until/issues"
   },
-  "homepage": "https://github.com/jmni-cn/juntils#readme",
+  "homepage": "https://github.com/jmni-cn/jmni-until#readme",
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
