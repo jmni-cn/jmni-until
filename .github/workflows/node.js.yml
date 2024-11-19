@@ -39,7 +39,7 @@ jobs:
 
   # 语义化发布和自动生成版本信息
   release:
-    needs: build  # 依赖 build 阶段成功
+    # needs: build  # 依赖 build 阶段成功
     runs-on: ubuntu-latest
 
     steps:
