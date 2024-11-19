@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/jmni-cn/jmni-until/compare/v0.2.0...v0.2.1) (2024-11-19)
+
+
+### Bug Fixes
+
+* add example ([ae3bd86](https://github.com/jmni-cn/jmni-until/commit/ae3bd8695ade28115c49c0ef234f3d0277bdd4ed))
+
 # [0.2.0](https://github.com/jmni-cn/jmni-until/compare/v0.1.2...v0.2.0) (2024-11-19)
 
 
