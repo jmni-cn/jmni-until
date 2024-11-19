@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jmni-cn/jmni-until.git"
+    "url": "git+git@github.com:jmni-cn/jmni-until.git"
   },
   "author": "jmni.cn",
   "license": "ISC",
