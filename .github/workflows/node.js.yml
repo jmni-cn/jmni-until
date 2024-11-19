@@ -1,105 +1,85 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
+name: Node.js CI and Release
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
+  # 构建和测试
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+      # 检出代码
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
-      - run: yarn
-      # 测试，并生成测试覆盖率文件
-      # - run: yarn run coveralls
-      - run: yarn run build
-      # # 上报
-      # - name: Coveralls
-      #   uses: coverallsapp/github-action@master
+
+      # # 缓存依赖
+      # - name: Cache Yarn dependencies
+      #   uses: actions/cache@v3
       #   with:
-      #     github-token: ${{ secrets.HUB_TOKEN }}
+      #     path: ~/.cache/yarn
+      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-yarn-
 
-  # publish-npm任务
-  publish-npm:
-    # 在ubuntu最新版本的虚拟机执行
-    runs-on: ubuntu-latest
-    # 设置变量
-    strategy:
-      matrix:
-        node-version: [ 20.x ]
-    steps:
-      # 检查并切换到main分支
-      - name: 检查main分支
-        # 使用actions/checkout插件
-        uses: actions/checkout@v3
-
-      # 初始化缓存
-      - name:  缓存
-        uses: actions/cache@v3
-        id: cache-dependencies
-        with:
-          path: node_modules
-          key: ${{runner.OS}}-${{hashFiles('**/yarn.lock')}}
-
-      # 安装node
-      - name: 设置Node.js
-        # 使用actions/setup-node插件
+      # 设置 Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          # node版本
           node-version: ${{ matrix.node-version }}
-      - run: yarn
-      - run: yarn run build
 
-      # 读取当前版本号
-      - name: 读取当前版本号
-        id: version
-        uses: notiz-dev/github-action-json-property@release
+      # # 安装依赖
+      # - name: Install dependencies
+      #   run: yarn install --frozen-lockfile
+
+      # # 运行测试
+      # - name: Run Tests
+      #   run: yarn test
+
+      # 构建代码
+      - name: Build Project
+        run: yarn run build
+
+  # 语义化发布和自动生成版本信息
+  release:
+    needs: build  # 依赖 build 阶段成功
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出代码
+      - uses: actions/checkout@v3
+
+      # # 缓存依赖
+      # - name: Cache Yarn dependencies
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.cache/yarn
+      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-yarn-
+
+      # 设置 Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          # 读取版本号
-          path: './package.json'
-          prop_path: 'version'
+          node-version: 20.x
 
-      - run: echo ${{steps.version.outputs.prop}}
+      # # 安装依赖
+      # - name: Install dependencies
+      #   run: yarn install --frozen-lockfile
 
-      # 创建Release
-      - name: release
-        # 原本使用的 actions/create-release@latest来发版， actions/upload-release-asset@v1上传release-asset
-        # 不过这两个action官方已经停止维护了，所以换成如下
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ./lib
-          name: v${{steps.version.outputs.prop}}
-          tag_name: v${{steps.version.outputs.prop}}
-        env:
-          GITHUB_TOKEN: ${{ secrets.HUB_TOKEN }}
-
-      # 发布NPM包
-      - name: 发布NPM包
-        # 执行发布代码
+      # 配置 NPM
+      - name: Configure NPM
         run: |
-          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          npm publish
-        env:
-          # 配置 npm access token 环境变量
-          NPM_TOKEN: ${{secrets.NPM_JMNI_CN}}
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_JMNI_CN }}" > ~/.npmrc
 
-      # 刷新缓存
-      - name: 刷新缓存
-        run: |
-          curl https://purge.jsdelivr.net/npm/iemotion-pic@latest/lib/name.json
+      # 执行语义化发布
+      - name: Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.HUB_TOKEN }} # GitHub 提交权限
+          NPM_TOKEN: ${{ secrets.NPM_JMNI_CN }}       # NPM 发布权限
+        run: npx semantic-release
