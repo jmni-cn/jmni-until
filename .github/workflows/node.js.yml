@@ -5,44 +5,37 @@ on:
     branches: [ "main" ]
 
 jobs:
-  # 构建和测试
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [20.x]
-
-    steps:
-      # 检出代码
-      - uses: actions/checkout@v3
-
-      # # 缓存依赖
-      # - name: Cache Yarn dependencies
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: ~/.cache/yarn
-      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-yarn-
-
-      # 设置 Node.js
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      # 安装依赖
-      - name: Install dependencies
-        run: yarn
-
-      # # 运行测试
-      # - name: Run Tests
-      #   run: yarn test
-
-      # 构建代码
-      - name: Build Project
-        run: yarn run build
+  # # 构建和测试
+  # build:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [20.x]
+  #   steps:
+  #     # 检出代码
+  #     - uses: actions/checkout@v3
+  #     # # 缓存依赖
+  #     # - name: Cache Yarn dependencies
+  #     #   uses: actions/cache@v3
+  #     #   with:
+  #     #     path: ~/.cache/yarn
+  #     #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #     #     restore-keys: |
+  #     #       ${{ runner.os }}-yarn-
+  #     # 设置 Node.js
+  #     - name: Setup Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     # 安装依赖
+  #     - name: Install dependencies
+  #       run: yarn
+  #     # # 运行测试
+  #     # - name: Run Tests
+  #     #   run: yarn test
+  #     # 构建代码
+  #     - name: Build Project
+  #       run: yarn run build
 
   # 语义化发布和自动生成版本信息
   release:
@@ -53,16 +46,6 @@ jobs:
       # 检出代码
       - uses: actions/checkout@v3
 
-      # # 缓存依赖
-      # - name: Cache Yarn dependencies
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: ~/.cache/yarn
-      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-yarn-
-
-      # 设置 Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -72,6 +55,11 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+        # 构建代码
+      - name: Build Project
+        run: yarn run build
+
+
       # 配置 NPM
       - name: Configure NPM
         run: |
@@ -80,6 +68,6 @@ jobs:
       # 执行语义化发布
       - name: Semantic Release
         env:
-          GITHUB_TOKEN: ${{ secrets.HUB_TOKEN }} # GitHub 提交权限
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub 提交权限
           NPM_TOKEN: ${{ secrets.NPM_JMNI_CN }}       # NPM 发布权限
         run: npx semantic-release
