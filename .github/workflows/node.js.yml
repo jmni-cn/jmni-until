@@ -32,9 +32,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # # 安装依赖
-      # - name: Install dependencies
-      #   run: yarn install --frozen-lockfile
+      # 安装依赖
+      - name: Install dependencies
+        run: yarn
 
       # # 运行测试
       # - name: Run Tests
@@ -68,9 +68,9 @@ jobs:
         with:
           node-version: 20.x
 
-      # # 安装依赖
-      # - name: Install dependencies
-      #   run: yarn install --frozen-lockfile
+      # 安装依赖
+      - name: Install dependencies
+        run: yarn
 
       # 配置 NPM
       - name: Configure NPM
