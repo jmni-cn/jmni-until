@@ -23,7 +23,11 @@ module.exports = [
                 dir: 'lib',
                 format: 'umd',
                 entryFileNames: '[name].umd.js',
-                name: 'FE_utils',
+                name: 'jmni',
+                globals: {
+                    jmni: 'jmni'
+                },
+                compact: true,
                 sourcemap: false,
             },
         ],
