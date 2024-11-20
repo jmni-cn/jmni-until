@@ -1,3 +1,10 @@
+## [0.2.2](https://github.com/jmni-cn/jmni-until/compare/v0.2.1...v0.2.2) (2024-11-20)
+
+
+### Bug Fixes
+
+* test dist ([89fea98](https://github.com/jmni-cn/jmni-until/commit/89fea987a0a6da7ec170b3e6010fcac30a81e4ca))
+
 ## [0.2.1](https://github.com/jmni-cn/jmni-until/compare/v0.2.0...v0.2.1) (2024-11-19)
 
 
