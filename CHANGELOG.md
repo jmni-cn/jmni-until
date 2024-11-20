@@ -1,3 +1,10 @@
+## [0.2.3](https://github.com/jmni-cn/jmni-until/compare/v0.2.2...v0.2.3) (2024-11-20)
+
+
+### Bug Fixes
+
+* fix incorrect main/module/exports specified in its package.json. ([611b820](https://github.com/jmni-cn/jmni-until/commit/611b820744138ad252f2ade55d013b3366e97958))
+
 ## [0.2.2](https://github.com/jmni-cn/jmni-until/compare/v0.2.1...v0.2.2) (2024-11-20)
 
 
