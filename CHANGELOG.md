@@ -1,3 +1,10 @@
+## [0.2.4](https://github.com/jmni-cn/jmni-until/compare/v0.2.3...v0.2.4) (2024-11-21)
+
+
+### Bug Fixes
+
+* add string kebabCase capitalize ([d248fb0](https://github.com/jmni-cn/jmni-until/commit/d248fb09e38e4741213c36776606875c8facfbfc))
+
 ## [0.2.3](https://github.com/jmni-cn/jmni-until/compare/v0.2.2...v0.2.3) (2024-11-20)
 
 
