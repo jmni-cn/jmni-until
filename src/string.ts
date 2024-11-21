@@ -44,6 +44,46 @@ export const randomString = (length: number): string =>
  */
 export const capitalize = (str: string): string =>
     str.charAt(0).toUpperCase() + str.slice(1)
+/**
+ * 将字符串转换为 kebab-case
+ *
+ * 将输入字符串转换为 kebab-case（以连字符 `-` 分隔的形式），
+ * 处理大小写转换、去除多余的空格或下划线，并规范化连字符的使用。
+ *
+ * @param {string} str - 输入的字符串
+ * @returns {string} 转换后的 kebab-case 字符串
+ *
+ * @example
+ * const result = kebabCase("HelloWorld");
+ * console.log(result); // 输出 "hello-world"
+ *
+ * @example
+ * const result = kebabCase("hello world_example");
+ * console.log(result); // 输出 "hello-world-example"
+ */
+export const kebabCase = (str: string) =>
+    str
+        .replace(/([a-z])([A-Z])/g, '$1-$2')
+        .replace(/[\s_]+/g, '-')
+        .replace(/-{2,}/g, '-')
+        .replace(/^-|-$/g, '')
+        .toLowerCase();
+
+/**
+ * 将整个字符串转换为大写
+ *
+ * 将输入字符串中的所有字符转换为大写形式。
+ *
+ * @param {string} str - 输入的字符串
+ * @returns {string} 转换后的大写字符串
+ *
+ * @example
+ * const result = convertToUpperCase("hello");
+ * console.log(result); // 输出 "HELLO"
+ */
+export const convertToUpperCase = (str: string) => {
+    return str.toUpperCase();
+}
 
 /**
  * 将下划线字符串转换为驼峰格式
