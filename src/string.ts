@@ -16,6 +16,32 @@ export const generateUID = (): string => {
 }
 
 /**
+ * 生成唯一标识符 (UID)
+ *
+ * 生成格式为 `yyyymm` + `6位随机字母和数字` 的唯一标识符。
+ * 
+ * `yyyymm` 表示当前的年份和月份，`6位随机字母和数字` 是通过哈希随机生成的。
+ *
+ * @returns {string} 生成的 UID 字符串
+ *
+ * @example
+ * const uid = currenMonthUID();
+ * console.log(uid); // 输出类似 "202411a1b2c3"
+ */
+export const currenMonthUID = (): string => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0')
+    const randomChars = Array.from({ length: 6 }, () => {
+        const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        return chars.charAt(Math.floor(Math.random() * chars.length));
+    }).join('');
+
+    return `${year}${month}${randomChars}`;
+}
+
+
+/**
  * 生成随机字符串
  *
  * 生成指定长度的随机字符串，由数字和字母组成。
