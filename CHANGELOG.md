@@ -1,3 +1,10 @@
+## [0.2.5](https://github.com/jmni-cn/jmni-until/compare/v0.2.4...v0.2.5) (2024-12-03)
+
+
+### Bug Fixes
+
+* add currenMonthUID ([a413c98](https://github.com/jmni-cn/jmni-until/commit/a413c9863b706c4fecb4f6d21a60b79d5cd46fdf))
+
 ## [0.2.4](https://github.com/jmni-cn/jmni-until/compare/v0.2.3...v0.2.4) (2024-11-21)
 
 
