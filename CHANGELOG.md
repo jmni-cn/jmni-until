@@ -1,3 +1,10 @@
+## [0.2.8](https://github.com/jmni-cn/jmni-until/compare/v0.2.7...v0.2.8) (2024-12-16)
+
+
+### Bug Fixes
+
+* add formatTimeZoneOffset 格式化时区偏移 ([6515da8](https://github.com/jmni-cn/jmni-until/commit/6515da84b7b00acdfa84791c6b78a5f730c80055))
+
 ## [0.2.7](https://github.com/jmni-cn/jmni-until/compare/v0.2.6...v0.2.7) (2024-12-16)
 
 
