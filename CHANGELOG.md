@@ -1,3 +1,10 @@
+## [0.2.6](https://github.com/jmni-cn/jmni-until/compare/v0.2.5...v0.2.6) (2024-12-10)
+
+
+### Bug Fixes
+
+* add array fun ([60188eb](https://github.com/jmni-cn/jmni-until/commit/60188eba90528bd33c8b3a68f6895b7a7b6bebca))
+
 ## [0.2.5](https://github.com/jmni-cn/jmni-until/compare/v0.2.4...v0.2.5) (2024-12-03)
 
 
