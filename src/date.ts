@@ -38,3 +38,23 @@ export const formatDate = (timestamp: number, format: string): string => {
     // 替换格式字符串中的占位符
     return format.replace(regex, (key) => map[key]);
 };
+
+/**
+ * 格式化时区偏移
+ *
+ * 获取当前设备的时区偏移，并以 `UTC±hh:mm` 格式返回。
+ *
+ * @returns {string} 格式化后的时区偏移字符串
+ *
+ * @example
+ * const timeZone = formatTimeZoneOffset();
+ * console.log(timeZone); // 输出类似 "UTC+08:00" 或 "UTC-05:00"
+ */
+export const formatTimeZoneOffset = (): string => {
+    const date = new Date();
+    const offsetMinutes = date.getTimezoneOffset();
+    const offsetHours = Math.floor(Math.abs(offsetMinutes) / 60);
+    const offsetRemainingMinutes = Math.abs(offsetMinutes) % 60;
+    const sign = offsetMinutes > 0 ? '-' : '+';
+    return `UTC${sign}${String(offsetHours).padStart(2, '0')}:${String(offsetRemainingMinutes).padStart(2, '0')}`;
+};
