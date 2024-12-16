@@ -1,3 +1,10 @@
+## [0.2.7](https://github.com/jmni-cn/jmni-until/compare/v0.2.6...v0.2.7) (2024-12-16)
+
+
+### Bug Fixes
+
+* add navigator ([8d4f568](https://github.com/jmni-cn/jmni-until/commit/8d4f56844901f3d06ffc841f1752ecda2ee6700a))
+
 ## [0.2.6](https://github.com/jmni-cn/jmni-until/compare/v0.2.5...v0.2.6) (2024-12-10)
 
 
