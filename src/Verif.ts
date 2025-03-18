@@ -40,54 +40,54 @@ export const bufferToHex = (buffer: ArrayBuffer): string =>
         .join('');
 
 /**
- * 浏览器环境生成 HMAC-SHA256 签名
+ * 浏览器环境下生成 HMAC-SHA256 签名
  *
  * 生成包含 `timestamp`、`nonce` 和 `signature` 的签名参数对象。
  *
  * @param {string} [secretKey='jmni-until'] - 用于签名的密钥
- * @returns {Promise<Record<string, string | number>>} 包含 `timestamp`、`nonce` 和 `signature` 的对象
+ * @returns {Promise<{ timestamp: number; nonce: string; signature: string }>} 
+ * 包含 `timestamp`（时间戳，毫秒级）、`nonce`（16位随机十六进制字符串）和 `signature`（HMAC-SHA256 签名字符串）的对象
  *
  * @example
  * const signatureParams = await generateSignature();
  * console.log(signatureParams);
  * // 输出：
  * // {
- * //   timestamp: 1710772974000,
- * //   nonce: "a1b2c3d4e5f6g7h8",
- * //   signature: "a3f9c1b2..."
+ * //   timestamp: 1710772974000,  // 13位毫秒时间戳
+ * //   nonce: "a1b2c3d4e5f6g7h8", // 16位随机 hex 字符串
+ * //   signature: "d2e3f9c1b2a4..." // 64位 HMAC-SHA256 签名 hex 字符串
  * // }
  */
-export const generateSignature = async (secretKey = 'jmni-until'): Promise<Record<string, string | number>> => {
-    const timestamp = Date.now();
-    const nonce = genRanHex(16);
+export const generateSignature = async (secretKey = 'jmni-until'): Promise<{
+    timestamp: number;
+    nonce: string;
+    signature: string;
+  }> => {
+    const timestamp = Date.now(); // 毫秒级时间戳 (number)
+    const nonce = genRanHex(16); // 生成 16 位随机 hex 字符串
     const stringToSign = `timestamp=${timestamp}&nonce=${nonce}`;
-
+  
     // 导入密钥
     const cryptoKey = await crypto.subtle.importKey(
-        'raw',
-        strToUint8Array(secretKey),
-        { name: 'HMAC', hash: { name: 'SHA-256' } },
-        false,
-        ['sign']
+      'raw',
+      strToUint8Array(secretKey),
+      { name: 'HMAC', hash: { name: 'SHA-256' } },
+      false,
+      ['sign']
     );
-
+  
     // 计算签名
     const signatureBuffer = await crypto.subtle.sign(
-        'HMAC',
-        cryptoKey,
-        strToUint8Array(stringToSign)
+      'HMAC',
+      cryptoKey,
+      strToUint8Array(stringToSign)
     );
-
-    const signature = bufferToHex(signatureBuffer);
-    const params: Record<string, string | number> = {
-        timestamp,
-        nonce,
-        signature,
-    };
-
-    return params;
-};
-
+  
+    const signature = bufferToHex(signatureBuffer); // 转换为 hex 格式字符串
+  
+    return { timestamp, nonce, signature };
+  };
+  
 
 
 
