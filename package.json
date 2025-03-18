@@ -1,6 +1,6 @@
 {
   "name": "jmni",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "js until lib",
   "browser": "dist/index.umd.js",
   "main": "dist/index.cjs",

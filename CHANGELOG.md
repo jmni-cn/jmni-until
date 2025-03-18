@@ -1,3 +1,10 @@
+## [0.2.9](https://github.com/jmni-cn/jmni-until/compare/v0.2.8...v0.2.9) (2025-03-18)
+
+
+### Bug Fixes
+
+* add generateSignature ([486fb87](https://github.com/jmni-cn/jmni-until/commit/486fb87f237a67e92ca5459cd050a8e81e3978e5))
+
 ## [0.2.8](https://github.com/jmni-cn/jmni-until/compare/v0.2.7...v0.2.8) (2024-12-16)
 
 
