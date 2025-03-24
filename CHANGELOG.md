@@ -1,3 +1,10 @@
+## [0.2.10](https://github.com/jmni-cn/jmni-until/compare/v0.2.9...v0.2.10) (2025-03-18)
+
+
+### Bug Fixes
+
+* Fixed type ambiguity issues ([ebc7c44](https://github.com/jmni-cn/jmni-until/commit/ebc7c4475dd05cf8fef5254dec2b811175cd3310))
+
 ## [0.2.9](https://github.com/jmni-cn/jmni-until/compare/v0.2.8...v0.2.9) (2025-03-18)
 
 
