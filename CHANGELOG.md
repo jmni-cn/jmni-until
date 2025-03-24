@@ -1,3 +1,10 @@
+## [0.2.11](https://github.com/jmni-cn/jmni-until/compare/v0.2.10...v0.2.11) (2025-03-24)
+
+
+### Bug Fixes
+
+* add 更新当前页面的 URL 查询参数 ([b4d2ccb](https://github.com/jmni-cn/jmni-until/commit/b4d2ccbd336087fd6d6a118b5ca7f771a4f9fb1c))
+
 ## [0.2.10](https://github.com/jmni-cn/jmni-until/compare/v0.2.9...v0.2.10) (2025-03-18)
 
 
