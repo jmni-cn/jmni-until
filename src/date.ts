@@ -58,3 +58,58 @@ export const formatTimeZoneOffset = (): string => {
     const sign = offsetMinutes > 0 ? '-' : '+';
     return `UTC${sign}${String(offsetHours).padStart(2, '0')}:${String(offsetRemainingMinutes).padStart(2, '0')}`;
 };
+
+/**
+ * 将日期格式化为指定时区的本地时间字符串
+ *
+ * 接收一个日期值、目标时区和语言环境（locale），将其格式化为 `yyyy-MM-dd HH:mm:ss` 字符串。
+ * 所有参数都是可选的，默认格式为当前时间 + 中国时区（Asia/Shanghai）+ 中文格式（zh-CN）。
+ *
+ * @param {string | number | Date} [dateInput=new Date()] - 要格式化的时间（字符串、时间戳或 Date 对象）
+ * @param {string} [timezone='Asia/Shanghai'] - 时区名称（例如 "UTC", "Asia/Shanghai", "America/New_York"）
+ * @param {string} [locale='zh-CN'] - 语言区域设置，默认使用中文格式
+ * @returns {string} 格式化后的时间字符串，格式为 `yyyy-MM-dd HH:mm:ss`
+ *
+ * @throws {Error} 如果提供了无效的时间或时区，将抛出错误
+ *
+ * @example
+ * formatWithTimezone(); 
+ * // 当前时间 + Asia/Shanghai + zh-CN 输出: "2025-04-16 15:00:00"
+ *
+ * @example
+ * formatWithTimezone("2025-04-16T06:00:00Z", "UTC", "en-US");
+ * // 输出: "2025-04-16 06:00:00"
+ */
+export const formatWithTimezone = (
+    dateInput: string | number | Date = new Date(),
+    timezone: string = 'Asia/Shanghai',
+    locale: string = 'zh-CN'
+  ): string => {
+    const date = new Date(dateInput);
+  
+    if (isNaN(date.getTime())) {
+      throw new Error('Invalid date input');
+    }
+  
+    try {
+      const formatter = new Intl.DateTimeFormat(locale, {
+        timeZone: timezone,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      });
+  
+      const parts = formatter.formatToParts(date);
+      const dateMap = Object.fromEntries(parts.map(p => [p.type, p.value]));
+  
+      return `${dateMap.year}-${dateMap.month}-${dateMap.day} ${dateMap.hour}:${dateMap.minute}:${dateMap.second}`;
+    } catch (err) {
+      throw new Error(`Invalid timezone: "${timezone}"`);
+    }
+  };
+  
+  
