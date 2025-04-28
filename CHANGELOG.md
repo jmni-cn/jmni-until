@@ -1,3 +1,10 @@
+## [0.2.13](https://github.com/jmni-cn/jmni-until/compare/v0.2.12...v0.2.13) (2025-04-28)
+
+
+### Bug Fixes
+
+* 优化formatDate ([af71f09](https://github.com/jmni-cn/jmni-until/commit/af71f09e1875b4e94806a76ef8f8427df7d4be43))
+
 ## [0.2.12](https://github.com/jmni-cn/jmni-until/compare/v0.2.11...v0.2.12) (2025-04-16)
 
 
