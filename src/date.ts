@@ -49,12 +49,12 @@ export const formatDate = (
     's': String(date.getSeconds()),
   };
 
-  // 保证长占位符优先替换（如 'yyyy' 在 'yy' 之前）
   const keys = Object.keys(map).sort((a, b) => b.length - a.length);
   const regex = new RegExp(keys.join('|'), 'g');
 
-  return format.replace(regex, key => map[key]);
+  return format.replace(regex, key => map[key] ?? key);
 };
+
 
 
 /**
