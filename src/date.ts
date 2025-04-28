@@ -1,43 +1,61 @@
 /**
- * 格式化时间戳为指定格式
+ * 按指定格式格式化时间
  *
- * 兼容 date-fns 格式化字符串，比如 'yyyy-MM-dd HH:mm:ss'。
+ * 支持传入时间戳、日期字符串或 `Date` 对象，并根据格式模板输出字符串。
  *
- * @param {number} timestamp - 时间戳
- * @param {string} format - 格式化字符串，如 'yyyy-MM-dd HH:mm:ss' 或 date-fns 格式
- * @returns {string} 格式化后的日期字符串
+ * @param {string | number | Date} timestamp - 要格式化的时间，可以是字符串、时间戳或 Date 实例
+ * @param {string} [format='yyyy-MM-dd HH:mm:ss'] - 格式化模板，支持的占位符包括：
+ * yyyy, yy, MM, M, dd, d, HH, H, hh, h, mm, m, ss, s
+ * @returns {string} 格式化后的时间字符串
+ *
+ * @throws {Error} 如果输入的时间无效，会抛出错误
  *
  * @example
- * const result = formatDate(1672531200000, 'yyyy-MM-dd');
- * console.log(result); // 输出 "2023-01-01"
+ * formatDate(1714298400000);
+ * // 输出 "2025-04-28 18:00:00"
  *
- * const result2 = formatDate(1672531200000, 'yyyy/MM/dd HH:mm');
- * console.log(result2); // 输出 "2023/01/01 00:00"
+ * @example
+ * formatDate("2025-04-28T10:00:00Z", "yyyy/MM/dd");
+ * // 输出 "2025/04/28"
+ *
+ * @example
+ * formatDate(new Date(), "HH:mm:ss");
+ * // 输出 "18:00:00"
  */
-export const formatDate = (timestamp: number, format: string): string => {
-    const date = new Date(timestamp);
-    const map: Record<string, string> = {
-        'yyyy': String(date.getFullYear()),
-        'yy': String(date.getFullYear()).slice(-2),
-        'MM': String(date.getMonth() + 1).padStart(2, '0'),
-        'M': String(date.getMonth() + 1),
-        'dd': String(date.getDate()).padStart(2, '0'),
-        'd': String(date.getDate()),
-        'HH': String(date.getHours()).padStart(2, '0'),
-        'H': String(date.getHours()),
-        'hh': String(date.getHours() % 12 || 12).padStart(2, '0'),
-        'h': String(date.getHours() % 12 || 12),
-        'mm': String(date.getMinutes()).padStart(2, '0'),
-        'm': String(date.getMinutes()),
-        'ss': String(date.getSeconds()).padStart(2, '0'),
-        's': String(date.getSeconds()),
-    };
-    const keys = Object.keys(map).sort((a, b) => b.length - a.length);
-    const regex = new RegExp(keys.join('|'), 'g');
+export const formatDate = (
+  timestamp: string | number | Date,
+  format: string = 'yyyy-MM-dd HH:mm:ss'
+): string => {
+  const date = new Date(timestamp);
 
-    // 替换格式字符串中的占位符
-    return format.replace(regex, (key) => map[key]);
+  if (isNaN(date.getTime())) {
+    throw new Error('Invalid date input');
+  }
+
+  const map: Record<string, string> = {
+    'yyyy': String(date.getFullYear()),
+    'yy': String(date.getFullYear()).slice(-2),
+    'MM': String(date.getMonth() + 1).padStart(2, '0'),
+    'M': String(date.getMonth() + 1),
+    'dd': String(date.getDate()).padStart(2, '0'),
+    'd': String(date.getDate()),
+    'HH': String(date.getHours()).padStart(2, '0'),
+    'H': String(date.getHours()),
+    'hh': String(date.getHours() % 12 || 12).padStart(2, '0'),
+    'h': String(date.getHours() % 12 || 12),
+    'mm': String(date.getMinutes()).padStart(2, '0'),
+    'm': String(date.getMinutes()),
+    'ss': String(date.getSeconds()).padStart(2, '0'),
+    's': String(date.getSeconds()),
+  };
+
+  // 保证长占位符优先替换（如 'yyyy' 在 'yy' 之前）
+  const keys = Object.keys(map).sort((a, b) => b.length - a.length);
+  const regex = new RegExp(keys.join('|'), 'g');
+
+  return format.replace(regex, key => map[key]);
 };
+
 
 /**
  * 格式化时区偏移
