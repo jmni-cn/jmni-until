@@ -1,3 +1,10 @@
+## [0.2.12](https://github.com/jmni-cn/jmni-until/compare/v0.2.11...v0.2.12) (2025-04-16)
+
+
+### Bug Fixes
+
+* add formatWithTimezone ([7c923b5](https://github.com/jmni-cn/jmni-until/commit/7c923b50893f10aa68f25848b65cec0cc59982c8))
+
 ## [0.2.11](https://github.com/jmni-cn/jmni-until/compare/v0.2.10...v0.2.11) (2025-03-24)
 
 
