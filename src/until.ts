@@ -83,3 +83,70 @@ export const throttle = <T extends (...args: any[]) => void>(
         }
     }
 }
+
+
+/**
+ * 深度比较两个值是否相等（结构 & 值完全一致）
+ *
+ * 支持基本类型、对象、数组、NaN、null、undefined，安全可靠。
+ *
+ * @param a - 比较的第一个值
+ * @param b - 比较的第二个值
+ * @returns 是否相等
+ *
+ * @example
+ * isEqual({ a: 1 }, { a: 1 }) // true
+ * isEqual([1, 2], [1, 2]) // true
+ * isEqual(NaN, NaN) // true
+ */
+export function isEqual(a: any, b: any): boolean {
+    if (a === b) return true;
+  
+    // NaN 特判
+    if (typeof a === 'number' && typeof b === 'number') {
+      if (isNaN(a) && isNaN(b)) return true;
+    }
+  
+    // null / undefined
+    if (a == null || b == null) return a === b;
+  
+    // 类型不同
+    if (typeof a !== typeof b) return false;
+  
+    // Array
+    if (Array.isArray(a) && Array.isArray(b)) {
+      if (a.length !== b.length) return false;
+      for (let i = 0; i < a.length; i++) {
+        if (!isEqual(a[i], b[i])) return false;
+      }
+      return true;
+    }
+  
+    // Date
+    if (a instanceof Date && b instanceof Date) {
+      return a.getTime() === b.getTime();
+    }
+  
+    // RegExp
+    if (a instanceof RegExp && b instanceof RegExp) {
+      return a.toString() === b.toString();
+    }
+  
+    // Object（必须同为纯对象）
+    if (Object.prototype.toString.call(a) === '[object Object]' &&
+        Object.prototype.toString.call(b) === '[object Object]') {
+      const keysA = Object.keys(a);
+      const keysB = Object.keys(b);
+      if (keysA.length !== keysB.length) return false;
+  
+      for (const key of keysA) {
+        if (!Object.prototype.hasOwnProperty.call(b, key)) return false;
+        if (!isEqual(a[key], b[key])) return false;
+      }
+      return true;
+    }
+  
+    // 所有其他类型：不支持或无法判断相等
+    return false;
+  }
+  
