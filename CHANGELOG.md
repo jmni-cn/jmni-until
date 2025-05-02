@@ -1,3 +1,10 @@
+## [0.2.15](https://github.com/jmni-cn/jmni-until/compare/v0.2.14...v0.2.15) (2025-04-30)
+
+
+### Bug Fixes
+
+* add getRegionFromTimezone时区到地区中文名称映射表 ([16f20ec](https://github.com/jmni-cn/jmni-until/commit/16f20ec3c300ef0bc94f7583291a76f87be6b515))
+
 ## [0.2.14](https://github.com/jmni-cn/jmni-until/compare/v0.2.13...v0.2.14) (2025-04-28)
 
 
