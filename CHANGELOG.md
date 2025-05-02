@@ -1,3 +1,10 @@
+## [0.2.16](https://github.com/jmni-cn/jmni-until/compare/v0.2.15...v0.2.16) (2025-05-02)
+
+
+### Bug Fixes
+
+* add isEqual ([cbd2495](https://github.com/jmni-cn/jmni-until/commit/cbd249516ba26a5796e3ffb36af52f417c41f1cc))
+
 ## [0.2.15](https://github.com/jmni-cn/jmni-until/compare/v0.2.14...v0.2.15) (2025-04-30)
 
 
