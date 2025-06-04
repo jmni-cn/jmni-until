@@ -149,4 +149,32 @@ export function isEqual(a: any, b: any): boolean {
     // 所有其他类型：不支持或无法判断相等
     return false;
   }
-  
+
+/**
+ * 将 HTML 字符串中的 <img> 标签转换为自定义占位 <span> 标签。
+ *
+ * 此函数会查找 HTML 字符串中所有 <img src="..."> 标签，并将其替换为：
+ * `<span class="custom-image" data-src="..."></span>` 形式。
+ * 适用于懒加载、渲染优化或自定义图片组件的场景。
+ *
+ * ⚠️ 仅转换具有 `src` 属性的 `<img>` 标签，保留其他属性将被忽略。
+ *
+ * @param html - 原始 HTML 字符串
+ * @returns 替换后的 HTML 字符串，非字符串或空字符串将原样返回
+ *
+ * @example
+ * ```ts
+ * replaceImgTagsWithSpans('<p><img src="a.jpg" /></p>');
+ * // 返回 '<p><span class="custom-image" data-src="a.jpg"></span></p>'
+ * ```
+ */
+export function replaceImgTagsWithSpans(html: string): string {
+  if (typeof html !== 'string' || !html.trim()) return html;
+
+  return html.replace(
+    /<img\b[^>]*?\bsrc=["']([^"']+)["'][^>]*?>/gi,
+    (_match, src) => {
+      return `<span class="custom-image" data-src="${src}"></span>`;
+    }
+  );
+}
