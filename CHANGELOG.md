@@ -1,3 +1,10 @@
+## [0.2.17](https://github.com/jmni-cn/jmni-until/compare/v0.2.16...v0.2.17) (2025-06-04)
+
+
+### Bug Fixes
+
+* add replaceImgTagsWithSpans ([251131c](https://github.com/jmni-cn/jmni-until/commit/251131caf4a442f55d9d887442915a32fe3ad8f2))
+
 ## [0.2.16](https://github.com/jmni-cn/jmni-until/compare/v0.2.15...v0.2.16) (2025-05-02)
 
 
