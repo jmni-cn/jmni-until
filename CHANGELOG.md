@@ -1,3 +1,10 @@
+## [0.2.18](https://github.com/jmni-cn/jmni-until/compare/v0.2.17...v0.2.18) (2025-06-26)
+
+
+### Bug Fixes
+
+* add resolveFileMimeType ([1421c80](https://github.com/jmni-cn/jmni-until/commit/1421c80355c45222913125793047bd5e0e225536))
+
 ## [0.2.17](https://github.com/jmni-cn/jmni-until/compare/v0.2.16...v0.2.17) (2025-06-04)
 
 
